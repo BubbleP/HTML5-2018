@@ -102,16 +102,51 @@ function update(){
 
 
 //jump if touching the ground/platform
-   if(cursors.ssup.isDown && player.body.touching.down){
+   if(cursors.up.isDown && player.body.touching.down){
    	player.body.velocity.y = -300;
    }
 
 
+game.physics.arcade.overlap(player,stars, collectStar);
+game.physics.arcade.overlap(player, enemy1, loseLife);
+
+moveEnemy1();
+
+if (lives <= 0);
+endGame();
  
 }
+function endGame(){
+	player.kill();
+	scorelabel.text = "You Died! Your measly score is" + score;
+	scoretext.visible = false;
+	scorelabel.visible = false;
+	scoretext.visible = false;
+}
 
+function moveEnemy1(){
+	if (enemy1.x > 759){
+		enemy1.animations.play("left");
+		enemy1.body.velocity.x = -120;
+	} else if (enemy1. < 405){
+		enemy1.animations.play("right");
+		enemy1.body.velocity.x = 120;
+	}
+}
 
+function collectStar(player,star){
+	score +=1;
+	star.kill();
 
+	scoretext.setText(score);
+	star.reset(Math.random()*750, 0);
+}
 
+function loseLife(player,enemy1){
+	lives -=1;
+	lifetext.setText(lives);
 
+	enemy1.kill();
+	enemy1.reset(10,20);
+}
 
