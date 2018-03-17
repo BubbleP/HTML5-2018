@@ -20,7 +20,7 @@ function create(){
 
 	//create group of platforms
 	platforms = game.add.physicsGroup();
-	game.enableBody = true;
+	platforms.enableBody = true;
 
 	//create ground
 	var ground = platforms.create(0, 550, 'ground');
@@ -75,6 +75,7 @@ function create(){
 	    stars.enableBody = true;
 	    for(var i = 0; i < 12; i++){
 	    	var star = stars.create(i*70, 0, 'star');
+	    	star.body.gravity.y = 200;
 	    	star.body.bounce.y = 0.7 + Math.random()*0.2
 	   }
 	   cursors = game.input.keyboard.createCursorKeys();
@@ -82,18 +83,18 @@ function create(){
 
 
 function update(){
-	game.physics.arcade.collide(player.platforms);
-    game.physics.arcade.collide(enemy1.platforms);
-	game.physics.arcade.collide(stars.platforms);
+	game.physics.arcade.collide(player,platforms);
+    game.physics.arcade.collide(enemy1,platforms);
+	game.physics.arcade.collide(stars,platforms);
 
 	//player still if no events
 	player.body.velocity.x = 0;
 
 	if(cursors.left.isDown){
 		player.animations.play('left');
-		player.body.velocity.x = 150;
+		player.body.velocity.x = -150;
 	} else if (cursors.right.isDown){
-		player.animations.play('left');
+		player.animations.play('right');
 		player.body.velocity.x = 150;
 	} else { 
 		player.animations.stop();
@@ -112,23 +113,23 @@ game.physics.arcade.overlap(player, enemy1, loseLife);
 
 moveEnemy1();
 
-if (lives <= 0);
+if (life <= 0);{
 endGame();
- 
+ }
 }
 function endGame(){
 	player.kill();
 	scorelabel.text = "You Died! Your measly score is" + score;
-	scoretext.visible = false;
-	scorelabel.visible = false;
-	scoretext.visible = false;
+	scorenumber.visible = false;
+	lifelabel.visible = false;
+	lifenumber.visible = false;
 }
 
 function moveEnemy1(){
 	if (enemy1.x > 759){
 		enemy1.animations.play("left");
 		enemy1.body.velocity.x = -120;
-	} else if (enemy1. < 405){
+	} else if (enemy1.x < 405){
 		enemy1.animations.play("right");
 		enemy1.body.velocity.x = 120;
 	}
@@ -138,13 +139,13 @@ function collectStar(player,star){
 	score +=1;
 	star.kill();
 
-	scoretext.setText(score);
+	scorenumber.setText(score);
 	star.reset(Math.random()*750, 0);
 }
 
 function loseLife(player,enemy1){
-	lives -=1;
-	lifetext.setText(lives);
+	life -=1;
+	lifenumber.setText(life);
 
 	enemy1.kill();
 	enemy1.reset(10,20);
