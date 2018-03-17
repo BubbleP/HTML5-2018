@@ -113,9 +113,9 @@ game.physics.arcade.overlap(player, enemy1, loseLife);
 
 moveEnemy1();
 
-// if (life <= 0);{
-// endGame();
-//  }
+if (life <= 0){
+endGame();
+ }
 }
 function endGame(){
 	player.kill();
