@@ -10,6 +10,7 @@ function preload(){
 	game.load.image('star', 'assets/star.png')
 	game.load.spritesheet('dude', 'assets/dude.png', 32, 48)
 	game.load.spritesheet('baddie', 'assets/baddie.png', 32, 32)
+	game.load.spritesheet('firstaid','assets/firstaid.png'32,32)
 }
 
 function create(){
@@ -19,7 +20,7 @@ function create(){
 	game.add.sprite(0,0,'sky');
 
 	//create group of platforms
-	platforms = game.add.physicsGroup();
+	platforms = game.add.physicsGroup(); 
 	platforms.enableBody = true;
 
 	//create ground
@@ -39,7 +40,7 @@ function create(){
 
 
 	//position the score
-	scorelabel = game.add.text(300,560, "Score:", style);
+	scorelabel = game.add.text(190,560, "Score: ", style);
 	scorenumber = game.add.text(300,560, score, style);
 	scorelabel.setShadow(3,3, 'rgba(0,0,0,0.5)', 2);
 	scorenumber.setShadow(3,3, 'rgba(0,0,0,0.5)', 2);
