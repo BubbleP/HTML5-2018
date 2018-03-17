@@ -119,7 +119,7 @@ endGame();
 }
 function endGame(){
 	player.kill();
-	scorelabel.text = "You Died! Your measly score is" + score;
+	scorelabel.text = "You Died! Your measly score is " + score;
 	scorenumber.visible = false;
 	lifelabel.visible = false;
 	lifenumber.visible = false;
